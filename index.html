@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="sv-SE">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery plugin - TypoMeasure</title>
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js" type="text/javascript"></script>
+	<script src="jquery.typoMeasure.js" type="text/javascript"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(function() {
+		var d = $('#main-section').find('p').typoMeasure();
+		console.log(d);
+		var t = $('#main-section').offset().top;
+		$('#description').css('top', t);
+		
+		$('#main-section').find('p').hover(
+			function() {
+				var data = $(this).data('typoMeasureData');
+				var lis = 	'<li>Text Length: <strong>'+data.fullText.length+'</strong></li>'+
+							'<li>Lines: <strong>'+data.lines.length+'</strong></li>'+
+							'<li>Avg Measure: <strong>'+Math.round(data.avgMeasure)+'</strong></li>';
+				
+				$('#pInfoList').append(lis);
+			},
+			function() {
+				$('#pInfoList').empty();
+			}
+		);
+		
+		});
+	</script>
+</head>
+<body>
+	<h1>jQuery.<strong>TypoMeasure</strong>.js</h1>
+	<h2 class="subline">Alpha - Lots of known design faults.</h2>
+	<section id="main-section">
+		<h2>&lsaquo;p&rsaquo;</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla odio vel nulla interdum non hendrerit tortor ultricies. Nullam pulvinar eros nec dolor condimentum dignissim. Nam suscipit luctus sapien, eget varius nisi tempor id. Suspendisse volutpat, purus non tincidunt hendrerit, turpis justo vehicula elit, facilisis luctus mauris nisi vel mauris.</p>
+		
+		<h3>Curabitur</h3>
+		<p> Mauris consequat nisl id erat porttitor sagittis. Curabitur consectetur rutrum nibh et iaculis. Aenean eget nunc eros. Duis suscipit erat eget nunc mollis non tristique purus eleifend. Nam placerat, ante et ornare malesuada, diam diam accumsan lorem, porttitor elementum felis turpis sed justo. Proin lacinia sodales felis, fringilla mollis enim ullamcorper id. Vivamus ac ipsum non leo fringilla volutpat vel non metus.</p>
+
+		<p>Duis quis diam sit amet lorem cursus interdum eu a orci. Sed nunc magna, lobortis id condimentum quis, convallis eget nisi. Nunc malesuada turpis id purus cursus non consectetur enim lacinia. Nunc elit nulla, adipiscing sed rhoncus et, laoreet sed nisl.</p>
+	</section>
+	<aside id="description">
+		<h4>Description</h4>
+		<p>A jQuery plugin to determine the lengths of each line in a block type element.</p>
+		<!--<ol>
+			<li></li>
+		</ol>-->
+		<p>Hover over a paragraph and stats will be shown here below.</p>
+		<ul id="pInfoList">
+		</ul>
+	</aside>
+</body>
+</html>
